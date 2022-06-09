@@ -1086,3 +1086,54 @@ p apple('50') # => "It's hotter than the sun!!"
 p apple(4) # => "Help yourself to a honeycomb Yorkie for the glovebox."
 p apple("12") # => "Help yourself to a honeycomb Yorkie for the glovebox."
 p apple(60) # => "It's hotter than the sun!!"
+
+
+# Simple Fun #165: Withdraw 
+
+# Task
+
+# An ATM ran out of 10 dollar bills and only has 100, 50 and 20 dollar bills.
+
+# Given an amount between 40 and 10000 dollars (inclusive) and assuming that the ATM wants to use as few bills as possible, determinate the minimal number of 100, 50 and 20 dollar bills the ATM needs to dispense (in that order).
+# Example
+
+# For n = 250, the result should be [2, 1, 0].
+
+# For n = 260, the result should be [2, 0, 3].
+
+# For n = 370, the result should be [3, 1, 1].
+# Input/Output
+
+#     [input] integer n Amount of money to withdraw. Assume that n is always exchangeable with [100, 50, 20] bills.
+#     [output] integer array An array of number of 100, 50 and 20 dollar bills needed to complete the withdraw (in that order).
+
+
+def withdraw(n)
+  bills = [0, 0, 0]
+  while n > 0 
+    if n - 100 > 30 || n - 100 == 0 || n - 100 == 20
+      bills[0] += 1
+      n -= 100
+    elsif n - 50 > 30 || n - 50 == 0 || n - 50 == 20
+      bills[1] += 1
+      n -= 50
+    else 
+      bills[2] += 1
+      n -= 20
+    end
+  end
+  bills
+end
+
+
+
+p withdraw(40) # => [0, 0, 2]
+p withdraw(250) # => [2, 1, 0]
+p withdraw(260) # => [2, 0, 3]
+p withdraw(230) # => [1, 1, 4]
+p withdraw(60) # => [0, 0, 3]
+p withdraw(720) # => [7, 0, 1]
+p withdraw(240) # => [2, 0, 2]
+p withdraw(640) # => [6, 0, 2]
+p withdraw(920) # => [9, 0, 1]
+p withdraw(70) # => [0, 1, 1]
