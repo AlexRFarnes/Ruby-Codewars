@@ -1339,15 +1339,16 @@ p max_sequence([-2, 1, -7, 4, -10, 2, 1, 5, 4]) # => 12
 
 # Good luck!
 
+# def decodeMorse(morseCode)
+#   morseCode.split("   ").map do |word|
+#     word.split(" ").map{ |char|  MORSE_CODE[char] }.join("")
+#   end
+#   .join(" ")
+#   .strip
+# end
 
 def decodeMorse(morseCode)
-  morseCode.split("   ").map do |word|
-    word.split(" ").map{ |char|  MORSE_CODE[char] }.join("")
-  end
-  .join(" ")
-  .strip
+  morseCode.split("   ").map { |word| word.split(" ").map { |char| MORSE_CODE[char] }.join("") }.join(" ").strip
 end
-
-
 
 p decodeMorse('.... . -.--   .--- ..- -.. .') #=> 'HEY JUDE'
