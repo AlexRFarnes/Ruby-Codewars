@@ -1259,3 +1259,39 @@ p array_diff([1,2,2], [2]) # => [1]
 p array_diff([1,2,2], []) # => [1,2,2]
 p array_diff([], [1,2]) # => []
 p array_diff([1,2,3], [1,2]) # => [3]
+
+
+
+# Maximum subarray sum
+
+# The maximum sum subarray problem consists in finding the maximum sum of a contiguous subsequence in an array or list of integers:
+
+# maxSequence [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+# -- should be 6: [4, -1, 2, 1]
+
+# Easy case is when the list is made up of only positive numbers and the maximum sum is the sum of the whole array. If the list is made up of only negative numbers, return 0 instead.
+
+# Empty list is considered to have zero greatest sum. Note that the empty list or array is also a valid sublist/subarray.
+
+
+def max_sequence(arr)
+  # return 0 if arr.size == 0
+  return 0 if arr.all?(&:negative?)
+  max = 0
+  arrStart = 0
+  while(arrStart < arr.size)
+    arrEnd = arr.size - 1 
+    while(arrStart <= arrEnd)
+      max = max < arr.slice(arrStart..arrEnd).sum ? arr.slice(arrStart..arrEnd).sum : max
+      arrEnd -= 1
+    end
+    arrStart += 1
+  end
+  max
+end
+
+p max_sequence([]) # => 0
+p max_sequence([-2, 1, -3, 4, -1, 2, 1, -5, 4]) # => 6
+p max_sequence([11]) # => 11
+p max_sequence([-32]) # => 0
+p max_sequence([-2, 1, -7, 4, -10, 2, 1, 5, 4]) # => 12
