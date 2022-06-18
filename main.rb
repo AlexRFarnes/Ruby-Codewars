@@ -1504,3 +1504,86 @@ end
 
 p sum([]) # => 0
 p sum([1, 5.2, 4, 0, -1]) # => 9.2
+
+
+# The Supermarket Queue
+
+# There is a queue for the self-checkout tills at the supermarket. Your task is write a function to calculate the total time required for all the customers to check out!
+# input
+
+#     customers: an array of positive integers representing the queue. Each integer represents a customer, and its value is the amount of time they require to check out.
+#     n: a positive integer, the number of checkout tills.
+
+# output
+
+# The function should return an integer, the total time required.
+# Important
+
+# Please look at the examples and clarifications below, to ensure you understand the task correctly :)
+# Examples
+
+# queue_time([5,3,4], 1)
+# should return 12
+# because when n=1, the total time is just the sum of the times
+
+# queue_time([10,2,3,3], 2)
+# should return 10
+# because here n=2 and the 2nd, 3rd, and 4th people in the 
+# queue finish before the 1st person has finished.
+
+# queue_time([2,3,10], 2)
+# should return 12
+
+# Clarifications
+
+#     There is only ONE queue serving many tills, and
+#     The order of the queue NEVER changes, and
+#     The front person in the queue (i.e. the first element in the array/list) proceeds to a till as soon as it becomes free.
+
+# N.B. You should assume that all the test input will be valid, as specified above.
+
+# P.S. The situation in this kata can be likened to the more-computer-science-related idea of a thread pool, with relation to running multiple processes at the same time: https://en.wikipedia.org/wiki/Thread_pool
+
+
+# def queue_time(customers, n)
+#   return 0 if customers.size == 0
+#   return customers.max if n >= customers.size
+#   time = 0
+#   currentCustomers = Array.new(n, 0)
+#   currentCustomers.map! { |c| customers.shift }
+#   # stop looping when customers.size equals 0 and all currentCustomers are equal to 0
+#   until customers.size == 0 && currentCustomers.all?(0) do
+#     if currentCustomers.include?(0)
+#       # for any zero currentCustomers replace it with the next customer if there are still customers available
+#       currentCustomers.map! {|c| c == 0  && customers.size > 0 ? customers.shift : c }
+#     end
+#     if currentCustomers.any?{ |c| c > 0 }
+#       # for any non zero currentCustomer subtract 1
+#       currentCustomers.map! { |c| c > 0 ? c - 1 : 0 }
+#     end
+#     time += 1
+#   end
+#   time
+# end
+
+# Refactored
+def queue_time(customers, till_count)
+  tills = Array.new(till_count,0)
+  customers.each do |service_time| 
+    tills[tills.index(tills.min)] += service_time 
+  end
+  tills.max
+end
+
+
+p queue_time([], 1) # => 0
+p queue_time([5], 1) # => 5
+p queue_time([2], 5) # => 2
+p queue_time([1,2,3,4,5], 1) # => 15
+p queue_time([1,2,3,4,5], 100) # => 5
+p queue_time([2,2,3,3,4,4], 2) # => 9
+p queue_time([35, 9, 87], 2) # => 96
+p queue_time([35, 938, 53, 76, 938, 8, 847, 834, 584, 165], 4) # => 1492
+p queue_time([74, 1, 485, 15, 9, 1, 2, 936, 348, 6, 820, 4, 3, 387, 4, 975, 439, 5, 512, 15, 69, 464, 32, 3, 10, 26, 8, 3, 9, 234, 61, 5, 48, 89, 56, 44, 9, 3, 87, 9, 80, 13, 98, 49, 858, 8, 55, 57, 7, 75, 12, 92, 3, 53, 66, 39, 1, 456, 7, 195, 662, 5, 2, 10], 49) # => 975
+p queue_time([5, 6, 678, 81, 72, 151, 933, 9, 41, 568, 92, 18, 861, 58, 2, 260, 599, 8, 1, 6, 8, 900, 9, 535, 552, 42, 17, 7, 9, 1, 68, 9, 2, 94, 83, 28, 4, 2, 39, 2, 293, 36, 4, 94, 620, 983, 56, 2, 23, 4, 634, 89, 52, 9, 89, 5, 177, 809, 48, 5, 558, 86, 6, 355, 8, 43, 70, 65, 294, 80, 4, 8, 319, 816, 20, 7, 6, 9], 65) # => 983
+
