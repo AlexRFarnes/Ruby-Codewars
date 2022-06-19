@@ -1599,3 +1599,20 @@ end
 p get_volume_of_cuboid(2, 3, 4) # => 24
 p get_volume_of_cuboid(4, 6, 8) # => 192
 p get_volume_of_cuboid(7, 14, 26) # => 2548
+
+
+# Bit Counting
+
+# Write a function that takes an integer as input, and returns the number of bits that are equal to one in the binary representation of that number. You can guarantee that input is non-negative.
+
+# Example: The binary representation of 1234 is 10011010010, so the function should return 5 in this case
+
+def count_bits(n)
+  n.to_s(2).count "1"
+end
+
+p count_bits(0) # => 0
+p count_bits(4) # => 1
+p count_bits(7) # => 3
+p count_bits(9) # => 2
+p count_bits(10) # => 2
