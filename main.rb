@@ -1587,3 +1587,15 @@ p queue_time([35, 938, 53, 76, 938, 8, 847, 834, 584, 165], 4) # => 1492
 p queue_time([74, 1, 485, 15, 9, 1, 2, 936, 348, 6, 820, 4, 3, 387, 4, 975, 439, 5, 512, 15, 69, 464, 32, 3, 10, 26, 8, 3, 9, 234, 61, 5, 48, 89, 56, 44, 9, 3, 87, 9, 80, 13, 98, 49, 858, 8, 55, 57, 7, 75, 12, 92, 3, 53, 66, 39, 1, 456, 7, 195, 662, 5, 2, 10], 49) # => 975
 p queue_time([5, 6, 678, 81, 72, 151, 933, 9, 41, 568, 92, 18, 861, 58, 2, 260, 599, 8, 1, 6, 8, 900, 9, 535, 552, 42, 17, 7, 9, 1, 68, 9, 2, 94, 83, 28, 4, 2, 39, 2, 293, 36, 4, 94, 620, 983, 56, 2, 23, 4, 634, 89, 52, 9, 89, 5, 177, 809, 48, 5, 558, 86, 6, 355, 8, 43, 70, 65, 294, 80, 4, 8, 319, 816, 20, 7, 6, 9], 65) # => 983
 
+
+# Volume of a Cuboid
+
+# Bob needs a fast way to calculate the volume of a cuboid with three values: the length, width and height of the cuboid. Write a function to help Bob with this calculation.
+
+def get_volume_of_cuboid(length, width, height)
+  length * width * height
+end
+
+p get_volume_of_cuboid(2, 3, 4) # => 24
+p get_volume_of_cuboid(4, 6, 8) # => 192
+p get_volume_of_cuboid(7, 14, 26) # => 2548
