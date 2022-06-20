@@ -1637,3 +1637,26 @@ p get_average([2, 2, 2, 2]) # => 2
 p get_average([1, 5, 87, 45, 8, 8]) # => 25
 p get_average([2,5,13,20,16,16,10]) # => 11
 p get_average([1,2,15,15,17,11,12,17,17,14,13,15,6,11,8,7]) # => 11
+
+
+# Abbreviate a Two Word Name
+
+# Write a function to convert a name into initials. This kata strictly takes two words with one space in between them.
+
+# The output should be two capital letters with a dot separating them.
+
+# It should look like this:
+
+# Sam Harris => S.H
+
+# patrick feeney => P.F
+
+def abbrev_name(name)
+  name.split(" ").map { |word| word[0].upcase }.join(".")
+end
+
+p abbrev_name("Sam Harris") # => "S.H"
+p abbrev_name("Patrick Feenan") # => "P.F"
+p abbrev_name("Evan Cole") # => "E.C"
+p abbrev_name("P Favuzzi") # => "P.F"
+p abbrev_name("David Mendieta") # => "D.M"
