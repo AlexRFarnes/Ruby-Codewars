@@ -1673,7 +1673,7 @@ p abbrev_name("David Mendieta") # => "D.M"
 # If a string contains all repeating characters, it should return an empty string ("") or None -- see sample tests.
 
 def  first_non_repeating_letter(s) 
-  s.chars.find(-> {""}){|char| s.downcase.chars.index(char.downcase) == s.downcase.chars.rindex(char.downcase)}
+  s.chars.find(-> {""}) { |char| s.downcase.chars.index(char.downcase) == s.downcase.chars.rindex(char.downcase) }
 end
 
 p first_non_repeating_letter('a') # =>  'a'
@@ -1681,3 +1681,45 @@ p first_non_repeating_letter('stress') # =>  't'
 p first_non_repeating_letter('sTreSS') # =>  'T'
 p first_non_repeating_letter('moonmen') # =>  'e'
 p first_non_repeating_letter('') # =>  ''
+
+
+# Simple number triangle
+
+# Consider the number triangle below, in which each number is equal to the number above plus the number to the left. If there is no number above, assume it's a 0.
+
+# 1
+# 1 1
+# 1 2 2
+# 1 3 5 5
+# 1 4 9 14 14
+# 1 5 14 28 42 42 
+
+# The triangle has 5 rows and the sum of the last row is sum([1,4,9,14,14]) = 42.
+
+# You will be given an integer n and your task will be to return the sum of the last row of a triangle of n rows.
+
+# In the example above:
+
+# solve(5) = 42
+
+def solve(n)
+  arr = [Array.new(n, 0)]
+  arr[0][0] = 1
+  (1..n-1).each do |row| 
+    arr << Array.new(n, 0)
+    for i in 0..row
+      left = i - 1 < 0 ? 0 : arr[row][i-1]
+      above = arr[row-1][i]
+      arr[row][i] = left + above
+    end
+  end
+  arr.last.sum
+end
+
+p solve(3) # => 5
+p solve(4) # => 14
+p solve(5) # => 42
+p solve(6) # => 132
+p solve(7) # => 429
+p solve(8) # => 1430
+p solve(20) # => 6564120420
