@@ -1768,3 +1768,28 @@ end
 p merge_arrays([1, 2, 3, 4], [5, 6, 7, 8]) #=> [1, 2, 3, 4, 5, 6, 7, 8]
 p merge_arrays([1, 3, 5, 7, 9], [10, 8, 6, 4, 2]) #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 p merge_arrays([1, 3, 5, 7, 9, 11, 12], [1, 2, 3, 4, 5, 10, 12]) #=> [1, 2, 3, 4, 5, 7, 9, 10, 11, 12]
+
+
+
+# Count the divisors of a number
+
+# Count the number of divisors of a positive integer n.
+
+# Random tests go up to n = 500000.
+# Examples (input --> output)
+
+# 4 --> 3 (1, 2, 4)
+# 5 --> 2 (1, 5)
+# 12 --> 6 (1, 2, 3, 4, 6, 12)
+# 30 --> 8 (1, 2, 3, 5, 6, 10, 15, 30)
+
+def divisors(n)
+  (1..n).filter { |div| n % div == 0 }.size
+end
+
+
+p divisors(1) # => 1
+p divisors(10) # => 4
+p divisors(11) # => 2
+p divisors(25) # => 3
+p divisors(54) # => 8
