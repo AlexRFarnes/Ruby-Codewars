@@ -1866,3 +1866,144 @@ p odd_or_even([1]) # => "odd"
 p odd_or_even([]) # => "even"
 p odd_or_even([-1023, 1, -2]) # => "even"
 p odd_or_even([-1023, -1, 3]) # => "odd"
+
+
+
+# Give me a Diamond
+
+# Jamie is a programmer, and James' girlfriend. She likes diamonds, and wants a diamond string from James. Since James doesn't know how to make this happen, he needs your help.
+# Task
+
+# You need to return a string that looks like a diamond shape when printed on the screen, using asterisk (*) characters. Trailing spaces should be removed, and every line must be terminated with a newline character (\n).
+
+# Return null/nil/None/... if the input is an even number or negative, as it is not possible to print a diamond of even or negative size.
+# Examples
+
+# A size 3 diamond:
+
+#  *
+# ***
+#  *
+
+# ...which would appear as a string of " *\n***\n *\n"
+
+# A size 5 diamond:
+
+#   *
+#  ***
+# *****
+#  ***
+#   *
+
+# ...that is:
+
+# "  *\n ***\n*****\n ***\n  *\n"
+
+
+def diamond(n)
+  return nil if n.even? || n <=0
+  upper_half = (1..n).to_a.select(&:odd?).map { |line|
+    ("*" * line).center(n, " ").rstrip + ("\n")
+  }
+  (upper_half + upper_half[0,n/2].reverse).join("")
+end
+
+
+p diamond(1) # => "*\n")
+p diamond(3) # => " *\n***\n *\n")
+p diamond(5) # => "  *\n ***\n*****\n ***\n  *\n")
+p diamond(0) # => nil)
+p diamond(-3) # => nil)
+p diamond(2) # => nil)
+
+# What is between?
+
+# Complete the function that takes two integers (a, b, where a < b) and return an array of all integers between the input parameters, including them.
+
+# For example:
+
+# a = 1
+# b = 4
+# --> [1, 2, 3, 4]
+
+
+def between(a, b)
+  (a..b).to_a
+end
+
+p between(1, 4) #=>  [1, 2, 3, 4]
+p between(-2, 2) #=>  [-2, -1, 0, 1, 2]
+
+
+# Take a Number And Sum Its Digits Raised To The Consecutive Powers And ....¡Eureka!!
+
+# The number 89 is the first integer with more than one digit that fulfills the property partially introduced in the title of this kata. What's the use of saying "Eureka"? Because this sum gives the same number.
+
+# In effect: 89 = 8^1 + 9^2
+
+# The next number in having this property is 135.
+
+# See this property again: 135 = 1^1 + 3^2 + 5^3
+
+# We need a function to collect these numbers, that may receive two integers a, b that defines the range [a, b] (inclusive) and outputs a list of the sorted numbers in the range that fulfills the property described above.
+
+# Let's see some cases:
+
+# sum_dig_pow(1, 10) == [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# sum_dig_pow(1, 100) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 89]
+
+# If there are no numbers of this kind in the range [a, b] the function should output an empty list.
+
+# sum_dig_pow(90, 100) == []
+
+def sum_dig_pow(a, b)
+  (a..b).select{ |num| num.to_s.chars.each_with_index.reduce(0){|memo, (num, index)| memo + num.to_i ** (index + 1) } == num }
+end
+
+def sum_dig_pow(a, b)
+  (a..b).select{ |num| num == num.to_s.chars.map.with_index(1) { |e, idx| e.to_i ** idx }.reduce(:+) }
+end
+
+
+p sum_dig_pow(1, 10) # => [1, 2, 3, 4, 5, 6, 7, 8, 9]
+p sum_dig_pow(1, 100) # => [1, 2, 3, 4, 5, 6, 7, 8, 9, 89]
+p sum_dig_pow(10, 100) # =>  [89]
+p sum_dig_pow(90, 100) # => []
+p sum_dig_pow(90, 150) # => [135]
+p sum_dig_pow(50, 150) # => [89, 135]
+p sum_dig_pow(10, 150) # => [89, 135]
+
+
+# Grasshopper - Check for factor
+
+# This function should test if the factor is a factor of base.
+
+# Return true if it is a factor or false if it is not.
+# About factors
+
+# Factors are numbers you can multiply together to get another number.
+
+# 2 and 3 are factors of 6 because: 2 * 3 = 6
+
+#     You can find a factor by dividing numbers. If the remainder is 0 then the number is a factor.
+#     You can use the mod operator (%) in most languages to check for a remainder
+
+# For example 2 is not a factor of 7 because: 7 % 2 = 1
+
+# Note: base is a non-negative number, factor is a positive number.
+
+
+def check_for_factor(base, factor)
+  base % factor == 0
+end
+
+
+p check_for_factor(10, 2) # => true
+p check_for_factor(63, 7) # => true
+p check_for_factor(2450, 5) # => true
+p check_for_factor(24612, 3) # => true
+p check_for_factor(9, 2) # => false
+p check_for_factor(653, 7) # => false
+p check_for_factor(2453, 5) # => false
+p check_for_factor(24617, 3) # => false
