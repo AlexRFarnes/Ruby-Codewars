@@ -2007,3 +2007,44 @@ p check_for_factor(9, 2) # => false
 p check_for_factor(653, 7) # => false
 p check_for_factor(2453, 5) # => false
 p check_for_factor(24617, 3) # => false
+
+
+# Grasshopper - Debug sayHello
+
+# Debugging sayHello function
+
+# The starship Enterprise has run into some problem when creating a program to greet everyone as they come aboard. It is your job to fix the code and get the program working again!
+
+# Example output:
+
+# Hello, Mr. Spock
+
+def say_hello(name)
+  "Hello, #{name}"
+end
+
+p say_hello('Mr. Spock') # => 'Hello, Mr. Spock'
+p say_hello('Captain Kirk') # => 'Hello, Captain Kirk'
+p say_hello('Liutenant Uhura') # => 'Hello, Liutenant Uhura'
+p say_hello('Dr. McCoy') # => 'Hello, Dr. McCoy'
+p say_hello('Mr. Scott') # => 'Hello, Mr. Scott'
+
+
+# Invert values
+
+# Given a set of numbers, return the additive inverse of each. Each positive becomes negatives, and the negatives become positives.
+
+# invert([1,2,3,4,5]) == [-1,-2,-3,-4,-5]
+# invert([1,-2,3,-4,5]) == [-1,2,-3,4,-5]
+# invert([]) == []
+
+def invert(list)
+  list.map{ |num| num * -1 }
+end
+
+
+p invert([1,2,3,4,5]) # => [-1,-2,-3,-4,-5]
+p invert([1,-2,3,-4,5]) # => [-1,2,-3,4,-5]
+p invert([0]) # => [0]
+p invert([-1,0,1]) # => [1,0,-1]
+p invert([]) # => []
