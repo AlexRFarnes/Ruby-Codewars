@@ -2063,3 +2063,4 @@ p double_integer(6) # => 12
 
 
 # 
+Equal Sides Of An Array
