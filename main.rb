@@ -2048,3 +2048,18 @@ p invert([1,-2,3,-4,5]) # => [-1,2,-3,4,-5]
 p invert([0]) # => [0]
 p invert([-1,0,1]) # => [1,0,-1]
 p invert([]) # => []
+
+
+# You Can't Code Under Pressure #1
+
+# Code as fast as you can! You need to double the integer and return it.
+
+def double_integer(i)
+  i * 2
+end
+
+
+p double_integer(6) # => 12
+
+
+# 
