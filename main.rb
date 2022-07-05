@@ -2172,3 +2172,22 @@ end
 
 p sort_my_string("CodeWars") # => "CdWr oeas"
 p sort_my_string("YCOLUE'VREER") # => "YOU'RE CLEVER"
+
+
+
+# Remove anchor from URL
+
+# Complete the function/method so that it returns the url with anything after the anchor (#) removed.
+# Examples
+
+# "www.codewars.com#about" --> "www.codewars.com"
+# "www.codewars.com?page=1" -->"www.codewars.com?page=1"
+
+def remove_url_anchor(url)
+  url.split("#")[0]
+end
+
+
+p remove_url_anchor("www.codewars.com#about") # => "www.codewars.com"
+p remove_url_anchor("www.codewars.com/katas/?page=1#about") # => "www.codewars.com/katas/?page=1"
+p remove_url_anchor("www.codewars.com/katas/") # => "www.codewars.com/katas/"
