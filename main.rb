@@ -2246,9 +2246,44 @@ def merge(row)
   result + [0] * (row.size - result.size);
 end
 
-
 p merge([2,0,2,2]) # => [4,2,0,0]
 p merge([2,0,2,4]) # => [4,4,0,0]
 p merge([0,0,2,2]) # => [4,0,0,0]
 
 
+# Highest and Lowest
+
+# n this little assignment you are given a string of space separated numbers, and have to return the highest and lowest number.
+# Examples
+
+# high_and_low("1 2 3 4 5")  # return "5 1"
+# high_and_low("1 2 -3 4 5") # return "5 -3"
+# high_and_low("1 9 3 4 -5") # return "9 -5"
+
+# Notes
+
+# All numbers are valid Int32, no need to validate them.
+# There will always be at least one number in the input string.
+# Output string must be two numbers separated by a single space, and highest number is first.
+
+def high_and_low(numbers)
+  numbers.split(" ").map(&:to_i).minmax.reverse.join(" ")
+end
+
+p high_and_low("8 3 -5 42 -1 0 0 -9 4 7 4 -4") # => "42 -9"
+p high_and_low("1 2 3") # => "3 1"
+
+
+# Stop gninnipS My sdroW!
+
+# Write a function that takes in a string of one or more words, and returns the same string, but with all five or more letter words reversed (Just like the name of this Kata). Strings passed in will consist of only letters and spaces. Spaces will be included only when more than one word is present.
+
+# Examples: spinWords( "Hey fellow warriors" ) => returns "Hey wollef sroirraw" spinWords( "This is a test") => returns "This is a test" spinWords( "This is another test" )=> returns "This is rehtona test"
+
+def spin_words(string)
+  string.split(" ").map { |word| word.size > 4 ? word.chars.reverse.join("") : word }.join(" ")
+end
+
+
+p spin_words("Welcome") # => "emocleW"
+p spin_words("Hey fellow warriors") # => "Hey wollef sroirraw"
