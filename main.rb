@@ -2243,7 +2243,7 @@ def merge(row)
   nums = row.reject(&:zero?)
   result = []
   result << (nums[0] == nums[1] ? nums.shift + nums.shift : nums.shift) until nums.empty?
-  result + [0] * (row.size - result.size);
+  result + [0] * (row.size - result.size)
 end
 
 p merge([2,0,2,2]) # => [4,2,0,0]
@@ -2313,3 +2313,37 @@ p digital_root(942) # => 6
 p digital_root(132189) # => 6
 p digital_root(493193) # => 2
 p digital_root(5) # => 5
+
+
+# Char Code Calculation
+
+# Given a string, turn each character into its ASCII character code and join them together to create a number - let's call this number total1:
+
+#   'ABC' --> 'A' = 65, 'B' = 66, 'C' = 67 --> 656667
+
+# Then replace any incidence of the number 7 with the number 1, and call this number 'total2':
+
+# total1 = 656667
+#               ^
+# total2 = 656661
+#               ^
+
+# Then return the difference between the sum of the digits in total1 and total2:
+
+#   (6 + 5 + 6 + 6 + 6 + 7)
+# - (6 + 5 + 6 + 6 + 6 + 1)
+# -------------------------
+#                        6
+
+
+def calc(s)
+  s.bytes.map(&:to_s).inject(:+).chars.map(&:to_i).inject(:+) - s.bytes.map(&:to_s).inject(:+).gsub("7", "1").chars.map(&:to_i).inject(:+)
+end
+
+p calc("ABC") # => 6
+p calc('abcdef') # => 6
+p calc('ifkhchlhfd') # => 6
+p calc('aaaaaddddr') # => 30
+p calc('jfmgklf8hglbe') # => 6
+p calc('jaam') # => 12
+p calc('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') # => 96
