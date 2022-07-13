@@ -2385,3 +2385,40 @@ p likes(['Peter']) # => 'Peter likes this'
 p likes(['Jacob', 'Alex']) # => 'Jacob and Alex like this'
 p likes(['Max', 'John', 'Mark']) # => 'Max, John and Mark like this'
 p likes(['Alex', 'Jacob', 'Mark', 'Max']) # => 'Alex, Jacob and 2 others like this'
+
+
+
+#Find the missing letter
+
+# Write a method that takes an array of consecutive (increasing) letters as input and that returns the missing letter in the array.
+
+# You will always get an valid array. And it will be always exactly one letter be missing. The length of the array will always be at least 2.
+# The array will always contain letters in only one case.
+
+# Example:
+
+# ['a','b','c','d','f'] -> 'e' ['O','Q','R','S'] -> 'P'
+
+# ["a","b","c","d","f"] -> "e"
+# ["O","Q","R","S"] -> "P"
+
+# (Use the English alphabet with 26 letters!)
+
+# Have fun coding it and please don't forget to vote and rank this kata! :-)
+
+# I have also created other katas. Take a look if you enjoyed this kata!
+
+# def find_missing_letter(arr)
+  # (arr.first.bytes[0]..arr.last.bytes[0]).to_a.select { |code| !arr.include?(code.chr) }[0].chr
+# end
+  
+def find_missing_letter(arr)
+  ((arr.first.bytes[0]..arr.last.bytes[0]).to_a - arr.map(&:bytes).map(&:first))[0].chr
+end
+
+
+p find_missing_letter(["a","b","c","d","f"]) # => "e"
+p find_missing_letter(["O","Q","R","S"]) # => "P"
+p find_missing_letter(["b","d"]) # => "c"
+p find_missing_letter(["a","b","d"]) # => "c"
+p find_missing_letter(["b","d","e"]) # => "c"
