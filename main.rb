@@ -2409,11 +2409,11 @@ p likes(['Alex', 'Jacob', 'Mark', 'Max']) # => 'Alex, Jacob and 2 others like th
 # I have also created other katas. Take a look if you enjoyed this kata!
 
 # def find_missing_letter(arr)
-  # (arr.first.bytes[0]..arr.last.bytes[0]).to_a.select { |code| !arr.include?(code.chr) }[0].chr
+#   (arr[0]..arr[-1]).to_a.select { |char| !arr.include?(char) }.first
 # end
   
 def find_missing_letter(arr)
-  ((arr.first.bytes[0]..arr.last.bytes[0]).to_a - arr.map(&:bytes).map(&:first))[0].chr
+  ((arr.first..arr.last).to_a - arr).first
 end
 
 
@@ -2422,3 +2422,55 @@ p find_missing_letter(["O","Q","R","S"]) # => "P"
 p find_missing_letter(["b","d"]) # => "c"
 p find_missing_letter(["a","b","d"]) # => "c"
 p find_missing_letter(["b","d","e"]) # => "c"
+
+# Calculate Pyramid Height
+
+#   Your task is to calculate the maximum possible height of a perfectly square pyramid (the number of complete layers) that we can build, given n number of cubes as the argument.
+
+#     The top layer is always only 1 cube and is always present.
+#     There are no hollow areas, meaning each layer must be fully populated with cubes.
+#     The layers are thus so built that the corner cube always covers the inner 25% of the corner cube below it and so each row has one more cube than the one below it.
+
+# If you were given only 5 cubes, the lower layer would have 4 cubes and the top 1 cube would sit right in the middle of them, where the lower 4 cubes meet.
+
+# If you were given 14 cubes, you could build a pyramid of 3 layers, but 13 wouldn't be enough as you would be missing one cube, so only 2 layers would be complete and some cubes left over!
+
+# What is the tallest pyramid possible we can build from the given number of cubes? Simply return the number of complete layers.
+# Examples
+
+#  4  -->  1
+#  5  -->  2
+# 13  -->  2
+# 14  -->  3
+
+def pyramid_height(n)
+  level = 0
+  cubes = 0
+  while cubes < n
+    cubes += (level+1)**2
+    level += 1 if cubes <= n
+  end
+  level
+end
+
+
+p pyramid_height(1) # =>  1
+p pyramid_height(4) # =>  1
+p pyramid_height(5) # =>  2
+p pyramid_height(29) # =>  3
+p pyramid_height(30) # =>  4
+p pyramid_height(31) # =>  4
+p pyramid_height(1240) # =>  15
+p pyramid_height(1241) # =>  15
+p pyramid_height(1239) # =>  14
+p pyramid_height(1496) # =>  16
+p pyramid_height(1495) # =>  15
+p pyramid_height(4324) # =>  23
+p pyramid_height(4323) # =>  22
+p pyramid_height(4899) # =>  23
+p pyramid_height(4900) # =>  24
+p pyramid_height(5524) # =>  24
+p pyramid_height(5525) # =>  25
+p pyramid_height(6200) # =>  25
+p pyramid_height(6201) # =>  26
+p pyramid_height(6254) # =>  26
