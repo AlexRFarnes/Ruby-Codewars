@@ -2476,7 +2476,6 @@ p pyramid_height(6201) # =>  26
 p pyramid_height(6254) # =>  26
 
 
-
 # Friend or Foe?
 
 #   Make a program that filters a list of strings and returns a list with only your friends name in it.
@@ -2501,3 +2500,24 @@ p friend(["Ryan", "Kieran", "Mark"]) # => ["Ryan", "Mark"]
 p friend(["Ryan", "Jimmy", "123", "4", "Cool Man"]) # => ["Ryan"]
 p friend(["Jimm", "Cari", "aret", "truehdnviegkwgvke", "sixtyiscooooool"]) # => ["Jimm", "Cari", "aret"]
 p friend(["Love", "Your", "Face", "1"]) # => ["Love", "Your", "Face"]
+
+
+# Find the anonymous function
+
+# # Find the anonymous function in the given array and use the function to filter the array
+# Input
+# Your input. First Parameter will be an array with an anonymous function somewhere in the lot, The second Parameter will be an array which you will filter using the anonymous function you find.
+# Output
+# Your output. Output a filtered version of the second parameter using the function found in the first parameter. 
+
+
+def find_function(func,arr)
+  arr.select { |num| func.find { |el| el.is_a?(Proc) }.call(num) }
+end
+
+
+p find_function([lambda{|a| a%2==0},9,3,1,0],[1,2,3,4]) # => [2,4])
+p find_function([9,3,lambda{|a| a%2!=0},1,0],[1,2,3,4]) # => [1,3])
+p find_function([9,3,lambda{|a| a%13==0},1,0],[1,2,3,4]) # => [])
+p find_function([9,3,lambda{|a| a%13!=0},1,0],[1,2,3,4]) # => [1,2,3,4])
+p find_function([5,'a',lambda{|a| a*4!=0},1,0],[0,1,2,3,4]) # => [1,2,3,4])
