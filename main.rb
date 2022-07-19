@@ -2571,7 +2571,7 @@ p move(2, 5) # =>  12
 
 def gps(s, x)
   return 0 if x.length <= 1;
-  x[0..x.size-2].each_with_index.map { |item, i| (x[i+1] - item) * 3600 / s }.max.floor
+  x.each_cons(2).map { |a, b| (b - a) * 3600 / s }.max.floor
 end
 
 x = [0.0, 0.23, 0.46, 0.69, 0.92, 1.15, 1.38, 1.61]
