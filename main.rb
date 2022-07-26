@@ -2545,3 +2545,22 @@ p drop_while([1, 5, 111, 1111, 1111, 2, 4, 6, 4, 5], is_odd) # => [2,4,6,4,5]
 p drop_while([-1, -5, 127, 86, 902, 2, 1], is_odd) # => [86,902,2,1]
 p drop_while([2, 1, 2, 4, 3, 5, 4, 6, 7, 8, 9, 0], is_odd) # => [2,1,2,4,3,5,4,6,7,8,9,0]
 p drop_while([1, 3, 5, 7, 9, 111], is_odd) # => []
+
+
+# Plural
+
+# We need a simple function that determines if a plural is needed or not. It should take a number, and return true if a plural should be used with that number or false if not. This would be useful when printing out a string such as 5 minutes, 14 apples, or 1 sun.
+
+# You only need to worry about english grammar rules for this kata, where anything that isn't singular (one of something), it is plural (not one of something).
+
+# All values will be positive integers or floats, or zero.
+
+def plural(n)
+  n == 1 ? false : true
+end
+
+p plural(0) # => true
+p plural(0.5) # => true
+p plural(1) # => false
+p plural(100) # => true
+p plural(Float::INFINITY) # => true
