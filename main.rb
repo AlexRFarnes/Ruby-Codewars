@@ -2531,9 +2531,9 @@ is_odd = ->(n) { n.odd? }
 #   newArr
 # end
 
-  def drop_while(arr, pred)
-    arr.drop_while &pred
-  end
+def drop_while(arr, pred)
+  arr.drop_while(&pred)
+end
 
 p drop_while([2, 6, 4, 10, 1, 5, 4, 3], is_even) # => [1,5,4,3]
 p drop_while([2, 100, 1000, 10_000, 10_000, 5, 3, 4, 6], is_even) # => [5,3,4,6]
@@ -2546,7 +2546,6 @@ p drop_while([-1, -5, 127, 86, 902, 2, 1], is_odd) # => [86,902,2,1]
 p drop_while([2, 1, 2, 4, 3, 5, 4, 6, 7, 8, 9, 0], is_odd) # => [2,1,2,4,3,5,4,6,7,8,9,0]
 p drop_while([1, 3, 5, 7, 9, 111], is_odd) # => []
 
-
 # Plural
 
 # We need a simple function that determines if a plural is needed or not. It should take a number, and return true if a plural should be used with that number or false if not. This would be useful when printing out a string such as 5 minutes, 14 apples, or 1 sun.
@@ -2556,7 +2555,7 @@ p drop_while([1, 3, 5, 7, 9, 111], is_odd) # => []
 # All values will be positive integers or floats, or zero.
 
 def plural(n)
-  n == 1 ? false : true
+  !(n == 1)
 end
 
 p plural(0) # => true
@@ -2564,7 +2563,6 @@ p plural(0.5) # => true
 p plural(1) # => false
 p plural(100) # => true
 p plural(Float::INFINITY) # => true
-
 
 # Twisted Sum
 
@@ -2587,3 +2585,105 @@ end
 p  solution(4) # => 10
 p  solution(10) # => 46
 p  solution(12) # => 51
+
+
+  
+# Design a Simple Automaton (Finite State Machine)
+
+# Create a finite automaton that has three states. Finite automatons are the same as finite state machines for our purposes.
+
+# Our simple automaton, accepts the language of A, defined as {0, 1} and should have three states: q1, q2, and q3. Here is the description of the states:
+
+#     q1 is our start state, we begin reading commands from here
+#     q2 is our accept state, we return true if this is our last state
+
+# And the transitions:
+
+#     q1 moves to q2 when given a 1, and stays at q1 when given a 0
+#     q2 moves to q3 when given a 0, and stays at q2 when given a 1
+#     q3 moves to q2 when given a 0 or 1
+
+# The automaton should return whether we end in our accepted state (q2), or not (true/false).
+# Your task
+
+# You will have to design your state objects, and how your Automaton handles transitions. Also make sure you set up the three states, q1, q2, and q3 for the myAutomaton instance. The test fixtures will be calling against myAutomaton.
+
+# As an aside, the automaton accepts an array of strings, rather than just numbers, or a number represented as a string, because the language an automaton can accept isn't confined to just numbers. An automaton should be able to accept any 'symbol.'
+
+# Here are some resources on DFAs (the automaton this Kata asks you to create):
+
+#     http://en.wikipedia.org/wiki/Deterministic_finite_automaton
+#     http://www.cs.odu.edu/~toida/nerzic/390teched/regular/fa/dfa-definitions.html
+#     http://www.cse.chalmers.se/~coquand/AUTOMATA/o2.pdf
+
+# Example
+
+# a = Automaton.new
+# a.read_commands(["1", "0", "0", "1", "0"])  ==> false
+
+# We make these transitions:
+
+# input: ["1", "0", "0", "1", "0"]
+
+# 1: q1 -> q2
+# 0: q2 -> q3
+# 0: q3 -> q2
+# 1: q2 -> q2
+# 0: q2 -> q3
+
+# We end in q3 which is not our accept state, so we return false
+
+class Automaton
+  def initialize
+    @q1 = 0
+    @q2 = 1
+    @q3 = 2
+    @current_state = @q1
+  end
+
+  def read_commands(commands)
+    commands.each do |cmd|
+      case cmd
+      when '0'
+        if @current_state == @q2
+          @current_state = @q3
+        elsif @current_state == @q3
+          @current_state = @q2
+        end
+      when '1'
+        if @current_state == @q1
+          @current_state = @q2
+        elsif @current_state == @q3
+          @current_state = @q2
+        end
+      end
+    end
+    @current_state == @q2
+  end
+end
+
+# class Automaton
+#   def initialize
+#     @states = {
+#       "q1" => { "0" => "q1", "1" => "q2" },
+#       "q2" => { "0" => "q3", "1" => "q2" },
+#       "q3" => { "0" => "q2", "1" => "q2" }
+#     }
+#   end
+
+#   def read_commands(commands)
+#     state = "q1"
+
+#     commands.each do |command|
+#       state = @states[state][command]
+#     end
+
+#     state == "q2"
+#   end
+# end
+
+my_automaton = Automaton.new
+p my_automaton.read_commands(['1']) # => true
+
+my_automaton = Automaton.new
+p my_automaton.read_commands(%w[1 0 0 1]) # => true
