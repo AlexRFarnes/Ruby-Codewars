@@ -2586,8 +2586,6 @@ p  solution(4) # => 10
 p  solution(10) # => 46
 p  solution(12) # => 51
 
-
-  
 # Design a Simple Automaton (Finite State Machine)
 
 # Create a finite automaton that has three states. Finite automatons are the same as finite state machines for our purposes.
@@ -2687,3 +2685,37 @@ p my_automaton.read_commands(['1']) # => true
 
 my_automaton = Automaton.new
 p my_automaton.read_commands(%w[1 0 0 1]) # => true
+
+# Build Tower
+
+# Build a pyramid-shaped tower given a positive integer number of floors. A tower block is represented with "*" character.
+
+# For example, a tower with 3 floors looks like this:
+
+# [
+#   "  *  ",
+#   " *** ",
+#   "*****"
+# ]
+
+# And a tower with 6 floors looks like this:
+
+# [
+#   "     *     ",
+#   "    ***    ",
+#   "   *****   ",
+#   "  *******  ",
+#   " ********* ",
+#   "***********"
+# ]
+
+def towerBuilder(n_floors)
+  (1..(n_floors * 2 - 1)).step(2).map do |lvl|
+    ('*' * lvl).center((n_floors * 2 - 1), ' ')
+  end
+end
+
+p towerBuilder(1) # =>  ['*'], "1 floor")
+p towerBuilder(2) # =>  [' * ', '***'], "2 floors")
+p towerBuilder(3) # =>  ['  *  ', ' *** ', '*****'], "3 floors")
+p towerBuilder(4) # =>  ['   *   ', '  ***  ', ' ***** ', '*******'], "4 floors")
