@@ -2719,3 +2719,60 @@ p towerBuilder(1) # =>  ['*'], "1 floor")
 p towerBuilder(2) # =>  [' * ', '***'], "2 floors")
 p towerBuilder(3) # =>  ['  *  ', ' *** ', '*****'], "3 floors")
 p towerBuilder(4) # =>  ['   *   ', '  ***  ', ' ***** ', '*******'], "4 floors")
+
+
+# Goldbach's Conjecture
+
+# Goldbach's conjecture is amongst the oldest and well-known unsolved mathematical problems out there. In correspondence with Leonhard Euler in 1742, German mathematician Christian Goldbach made a conjecture stating that:
+
+# "Every even integer greater than 2 can be written as the sum of two primes"
+
+# which is known today as the (strong) Goldbach's conjecture.
+
+# Even though it's been thoroughly tested and analyzed and seems to be true, it hasn't been proved yet (thus, remaining a conjecture.)
+
+# Your task is to implement the function in the starter code, taking into account the following:
+
+#     If the argument isn't even and greater than two, return an empty array/tuple.
+#     For arguments even and greater than two, return a two-element array/tuple with two prime numbers whose sum is the given input.
+#     The two prime numbers must be the farthest ones (the ones with the greatest difference)
+#     The first prime number must be the smallest one.
+
+# A few sample test cases:
+
+# checkGoldbach(2)/check_goldbach(2) should return []
+
+# checkGoldbach(5)/check_goldbach(5) should return []
+
+# checkGoldbach(4)/check_goldbach(4) should return [2, 2]
+
+# checkGoldbach(6)/check_goldbach(6) should return [3, 3]
+
+# checkGoldbach(14)/check_goldbach(14) should return [3, 11]
+
+def check_goldbach(number)
+  return [] if number % 2 != 0 || number < 3
+  return [2, 2] if number == 4
+  return [3, 3] if number == 6
+  solution = [nil, nil]
+  primes = (2...number/2).select(&:prime?)
+  primesReversed = (number/2...number).select(&:prime?).reverse()
+  primes.each do |prime1|
+    primesReversed.each do |prime2|
+      if prime1 + prime2 == number
+          solution[0]=prime1
+          solution[1]=prime2
+        return solution.sort
+      end
+    end
+  end
+end
+
+
+p check_goldbach(2) # =>  []
+p check_goldbach(15) # =>  []
+p check_goldbach(6) # =>  [3, 3]
+p check_goldbach(4) # =>  [2, 2]
+p check_goldbach(8) # =>  [3, 5]
+p check_goldbach(10) # =>  [3, 7]
+p check_goldbach(24) # =>  [5, 19]
